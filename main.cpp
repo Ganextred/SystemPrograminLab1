@@ -4,9 +4,8 @@
 #include <fstream>
 
 using namespace std;
-std::vector<std::set<int>> cliques;
 
-vector<string> gwordsList;
+vector<string> wordsList;
 
 
 
@@ -52,7 +51,7 @@ void maxCliques(int i, vector<int>& clique, int** adjacency, int n)
     //if flag is false we were not able to add more vertexes and clique has a max size
     if (f == false and clique.size() > 1) {
         for (int it = 0; it < clique.size(); it++)
-            cout << gwordsList[clique[it]] << ' ';
+            cout << wordsList[clique[it]] << ' ';
         cout<<endl;
     }
 
@@ -90,10 +89,11 @@ int main() {
             if (currDistance > M)
                 M = currDistance;
         }
+    cout<<"Maximum distance: "<<M<<endl;
 
     //build Adjacency matrix
-    vector<string> wordsList(words.begin(), words.end());
-    gwordsList = wordsList;
+    cout<<"Words with maximum distance:"<<endl;
+    wordsList = *new vector<string>(words.begin(), words.end());;
     int wsize;
     wsize = wordsList.size();
     int** matrix = new int*[wsize];;
@@ -108,16 +108,18 @@ int main() {
         }
     }
     cout<<endl;
-
+    cout<<"Adjacency matrix:"<<endl;
     for (int i = 0; i<wsize; i++) {
         for (int j = 0; j < wsize; j++) {
             cout << matrix[i][j]<<" ";
         }
+        cout << wordsList[i] << " ";
         cout<<endl;
     }
 
     cout<<endl;
-
+    cout<<"Answer:"<<endl;
+    //at this point task is equal to finding maximum cliques in graph and Bron–Kerbosch algorithm would be more optimal
     vector<int> clique;
     maxCliques(0, clique,matrix, wsize);
 
