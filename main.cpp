@@ -29,19 +29,17 @@ bool is_clique(vector<int> currClique, int candidate, int** adjacency)
     return true;
 }
 
-// Function to find all the sizes
-// of maximal cliques
+// Function to find all maximal cliques
 void maxCliques(int i, vector<int>& clique, int** adjacency, int n)
 {
 
-    // Check if any vertices from i+1
-    // can be inserted
+    // Check if any vertices can be inserted
     bool f = false;
     for (int j = 0; j < n; j++) {
         // Try to add the vertex to clique
         if (is_clique(clique, j, adjacency)) {
             f = true;
-            if (j>=i) {
+            if (j>=i) { //insert only from i to avoid duplication
                 clique.push_back(j);
                 maxCliques(j, clique, adjacency, n);
                 clique.pop_back();
