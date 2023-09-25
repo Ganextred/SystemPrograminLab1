@@ -64,7 +64,7 @@ int main() {
     while (getline(file, line)) {
         string token;
         for(char c : line){
-            if(c != ' ' and c != ',' and c != '.')
+            if(isalpha(c) or  isdigit(c))
                 token+=c;
             else
             {
